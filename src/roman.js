@@ -8,7 +8,7 @@ function roman (romannumeral) {
     M: 1000
   }
 
-  var accumulator = 0
+  var arabic = 0
 
   var romannumeralarray = romannumeral.split('')
 
@@ -26,15 +26,20 @@ function roman (romannumeral) {
   // array map solution loop from back to front. change the array 
   // value to the number, if a decrementer change abs value of number. When done, sum the array
 
-  var accumulator = romannumeralarray.reduceRight(function (previousValue, currentromandigit, index, array) {
-    var currentvalue = numberLookup[currentromandigit]
-    previousValue += numberLookup[currentromandigit] > previousValue ? currentvalue : -currentvalue
-    return previousValue
+  arabic = romannumeralarray.reduceRight(function (accumulator, currentromandigit, index, array) {
+    var currentValue = numberLookup[currentromandigit]
+    var previousValue = accumulator > 0 ? numberLookup[array[index + 1]] : 0
+    accumulator += (numberLookup[currentromandigit] >= previousValue) ? currentValue : -currentValue
+    // accumulator += (numberLookup[currentromandigit] >= accumulator) ? currentValue : -currentValue
+    // console.log(accumulator, currentValue)
+    return accumulator
   }, 0
   )
   // console.log(accumulator)
-  return accumulator
+  return arabic
 }
+
+// MMXVIII
 
 // console.log(roman('IV'))
 
